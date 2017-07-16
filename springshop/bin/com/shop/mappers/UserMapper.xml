@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.dao.UserDao">
+	<resultMap type="Tuser" id="TuserResult">
+		<result property="userID" column="user_id" />
+		<result property="username" column="user_name" />
+		<result property="loginpw" column="user_pw" />
+		<result property="address" column="user_address" />
+		<result property="phone" column="user_tel" />
+		<result property="email" column="email" />
+	</resultMap>
+
+
+    <select id="userLogin"  parameterType="Map"  resultMap="TuserResult">
+	    select * from t_user where  user_name=#{username} and user_pw=#{loginpw}
+	</select>
+	
+
+	<select id="userMana" resultMap="TuserResult">
+		select * from t_user
+	</select>
+	
+	
+	<delete id="userDelete" parameterType="String">
+		delete from t_user where user_id=#{id}
+	</delete>
+	
+	
+	<insert id="userAdd" parameterType="Tuser">
+		insert into t_user (user_name,user_pw,user_address,user_tel,email) 
+		values(#{username},#{loginpw},#{address},#{phone},#{email})
+	</insert>
+	
+	
+	<update id="usermod" parameterType="Tuser" >
+		update t_user set user_name=#{username},user_pw=#{loginpw},user_address=#{address},user_tel=#{phone},email=#{email} 
+		where user_id=#{userID}
+	</update>
+	
+
+	<select id="userfindpassword" parameterType="Tuser"  resultType="String">
+		select user_pw  from t_user where user_name=#{username} and email=#{email}
+	</select>
+</mapper> 
+
+
+

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.dao.ProductDao">
+	<resultMap type="Tproduct" id="TproductResult">
+		<result property="goodID" column="goods_id" />
+		<result property="goodName" column="goods_name" />
+		<result property="goodMiaoshu" column="goods_miaoshu" />
+		<result property="goodPic" column="goods_pic" />
+		<result property="price" column="goods_shichangjia" />
+		<result property="catergoryID" column="goods_catelog_id" />
+		<result property="cunkun" column="goods_kucun" />
+		<result property="catergoryName" column="catelog_name" />
+	</resultMap>
+	
+	
+	<resultMap type="Tfenxi" id="TfenxiResult">
+		<result property="goodID" column="goods_id" />
+		<result property="goodName" column="goods_name" />
+		<result property="cnt" column="sum" />
+		<result property="price" column="price" />
+	</resultMap>
+	
+
+      <resultMap type="Tfavoriate" id="TfavoriateResult">
+		<result property="id" column="id" />
+		<result property="goodID" column="good_id" />
+		<result property="goodName" column="goods_name" />
+		<result property="userID" column="user_id" />
+		<result property="userName" column="user_name" />
+		<result property="url" column="url" />
+	</resultMap>
+	
+	
+	 <resultMap type="Tpingjia" id="TpingjiaResult">
+		<result property="id" column="id" />
+		<result property="userID" column="user_id" />
+		<result property="username" column="user_name" />
+		<result property="content" column="content" />
+		<result property="image" column="image" />
+		<result property="fenshu" column="fenshu" />
+	</resultMap>
+	
+	
+
+	<select id="productMana" resultMap="TproductResult">
+		select a.goods_id,a.goods_name,a.goods_miaoshu,a.goods_pic,a.goods_shichangjia,a.goods_catelog_id,a.goods_kucun,b.catelog_name from t_goods a join t_catelog b on b.catelog_id=a.goods_catelog_id 
+		where 1=1
+	</select>
+	
+	
+	
+	<select id="productDetail" parameterType="String" resultMap="TproductResult">
+		select a.goods_id,a.goods_name,a.goods_miaoshu,a.goods_pic,a.goods_shichangjia,a.goods_catelog_id,a.goods_kucun,b.catelog_name from t_goods a join t_catelog b on b.catelog_id=a.goods_catelog_id 
+		where 1=1 and a.goods_id=#{goodID}
+	</select>
+	
+	<select id="productAll" parameterType="Map" resultMap="TproductResult">
+		select a.goods_id,a.goods_name,a.goods_miaoshu,a.goods_pic,a.goods_shichangjia,a.goods_catelog_id,a.goods_kucun,b.catelog_name from t_goods a join t_catelog b on b.catelog_id=a.goods_catelog_id 
+		where 1=1
+		<if test="categoryID!=null">
+			and a.goods_catelog_id=#{categoryID}
+			
+		</if>
+			
+		<if test="productName!=null">
+			and a.goods_name like #{productName}	
+		</if>
+	</select>
+	
+	<delete id="productDel" parameterType="String">
+		delete from t_goods where goods_id=#{id}
+	</delete>
+	
+	
+	<insert id="productAdd" parameterType="Tproduct">
+		insert into t_goods(goods_name,goods_miaoshu,goods_pic,goods_shichangjia,goods_catelog_id,goods_kucun,goods_Del) 
+		values(#{goodName},#{goodMiaoshu},#{goodPic},#{price},#{catergoryID},#{cunkun},"no")
+	</insert>
+	
+	
+	<update id="productEdit" parameterType="Tproduct">
+		update t_goods set goods_name=#{goodName},goods_miaoshu=#{goodMiaoshu},goods_pic=#{goodPic},goods_shichangjia=#{price},goods_catelog_id=#{catergoryID},goods_kucun=#{cunkun}
+		where goods_id=#{goodID}
+	</update>
+	
+	
+	<select id="fenxi"  resultMap="TfenxiResult">
+		select a.goods_id,a.goods_name,( select IFNULL(sum(c.goods_quantity),0) from  t_orderitem c where c.goods_id=a.goods_id) sum 
+				 ,( select IFNULL(sum(a.goods_shichangjia*c.goods_quantity),0) from  t_orderitem c where c.goods_id=a.goods_id) price 
+        from t_goods a join t_catelog b on b.catelog_id=a.goods_catelog_id 
+        where 1=1 order by price desc
+	</select>
+	
+	
+	
+	<delete id="delFavoriate" parameterType="Map">
+		delete from  t_favoriate where good_id=#{goodID} and user_id=#{userID}
+	</delete>
+	
+	<insert id="addFavoriate" parameterType="Tfavoriate">
+	    insert into t_favoriate(good_id,user_id,url)
+	    values(#{goodID},#{userID},#{url})
+	</insert>
+	
+	
+	<select id="myFavoriate"  parameterType="String" resultMap="TfavoriateResult">
+		select tf.id,tf.good_id,cc.goods_name,bb.user_id,bb.user_name,tf.url 
+        from t_favoriate tf 
+        join t_user bb on bb.user_id=tf.user_id 
+        join t_goods cc on cc.goods_id=tf.good_id 
+        where tf.user_id=#{userID}
+	</select>
+	
+	
+	<select id="productpingjia"  parameterType="String" resultMap="TpingjiaResult">
+		select tf.*,cc.goods_name,bb.user_name
+        from t_pingjia tf 
+       join t_user bb on bb.user_id=tf.user_id 
+       join t_goods cc on cc.goods_id=tf.product_id 
+       where tf.product_id=#{goodID}
+	</select>
+	
+	
+	<insert id="addpingjia" parameterType="Tpingjia">
+	    insert into t_pingjia(product_id,content,createDate,user_id,image,fenshu)
+	    values(#{goodID},#{content},#{createDate},#{userID},#{image},#{fenshu})
+	</insert>	
+	
+	
+	<update id="orderitemEdit" parameterType="Map">
+	    update t_orderitem set status='已评价'
+		where order_id=#{orderID} and goods_id=#{goodID}
+	</update>
+</mapper> 

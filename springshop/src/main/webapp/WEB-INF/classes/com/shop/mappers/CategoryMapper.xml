@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.dao.CategoryDao">
+	<resultMap type="Tcategory" id="TcategoryResult">
+		<result property="categoryID" column="catelog_id" />
+
+		<result property="categoryName" column="catelog_name" />
+
+		<result property="parentCategoryID" column="parentCategoryID" />
+
+	</resultMap>
+
+
+	<select id="categoryMana" resultMap="TcategoryResult">
+		select * from t_catelog
+	</select>
+	
+	
+	<delete id="categoryDel" parameterType="String">
+		delete from t_catelog where catelog_id=#{id}
+	</delete>
+	
+	
+	<insert id="categoryAdd" parameterType="Tcategory">
+		insert t_catelog(catelog_name,catelog_del,parentCategoryID) 
+		values(#{categoryName},"no",#{parentCategoryID})
+	</insert>
+	
+</mapper> 
+

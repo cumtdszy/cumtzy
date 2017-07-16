@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.dao.OrderDao">
+	<resultMap type="Torder" id="TorderResult">
+		<result property="orderID" column="order_id" />
+		<result property="orderbianhao" column="order_bianhao" />
+		<result property="ordermoney" column="order_jine" />
+		<result property="orderDate" column="order_date" />
+		<result property="orderAddress" column="order_songhuodizhi" />
+		<result property="userID" column="order_user_id" />
+		<result property="userName" column="user_name" />
+		<result property="orderStatus" column="order_status" />
+	</resultMap>
+	
+	<resultMap type="TOrderItem" id="TOrderItemResult">
+		<result property="goodID" column="goods_id" />
+		<result property="goodName" column="goods_name" />
+		<result property="goodnum" column="goods_quantity" />
+		<result property="goodPrice" column="goods_shichangjia" />
+	    <result property="orderID" column="order_id" />
+		<result property="itemStatus" column="status" />
+	</resultMap>
+	
+	<select id="orderAll" parameterType="String" resultMap="TorderResult">
+		select aa.*,bb.user_name from t_order  aa join t_user bb on bb.user_id=aa.order_user_id
+		 where order_user_id=#{id}
+	</select>
+	
+	
+	<select id="orderMana"  resultMap="TorderResult">
+		select aa.*,bb.user_name from t_order  aa join t_user bb on bb.user_id=aa.order_user_id
+		 where 1=1
+	</select>
+	
+	<delete id="orderDel1" parameterType="String">
+		delete from t_order  where order_id=#{id}
+	</delete>
+	
+	
+	<delete id="orderDel2" parameterType="String">
+		delete from t_orderitem  where order_id=#{id}
+	</delete>
+	
+	
+	<select id="nextOrderID" resultType="Integer">
+		select max(order_id)+1 orderid from t_order
+	</select>
+	
+	
+	<insert id="orderAdd" parameterType="Torder">
+	    insert into t_order (order_id,order_bianhao,order_date,order_songhuodizhi,order_jine,order_user_id,order_status) 
+		values(#{orderID},#{orderbianhao},#{orderDate},#{orderAddress},#{ordermoney},#{userID},"已发货")
+	</insert>
+	
+	
+	<insert id="orderitemAdd" parameterType="TOrderItem">
+	   insert into t_orderitem (order_id,goods_id,goods_quantity,status) 
+		values(#{orderID},#{goodID},#{goodnum},"已发货")
+	</insert>
+	
+	
+	<select id="orderDetail" parameterType="String" resultMap="TOrderItemResult">
+	   select a.`status`,a.goods_id,b.goods_name,b.goods_shichangjia,a.goods_quantity,a.order_id from t_orderitem  a
+	   join t_goods b on b.goods_id=a.goods_id
+	   where order_id=#{orderID}		
+	</select>
+	
+	
+	<update id="cunkunEdit" parameterType="Map">
+		update t_goods set goods_kucun=goods_kucun-#{cunkun}
+		where goods_id=#{goodID}
+	</update>
+</mapper> 
+
+

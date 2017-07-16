@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.dao.AdminDao">
+	<resultMap type="Tadmin" id="TadminResult">
+		<result property="userId" column="userId"/>
+		
+		<result property="userName" column="userName"/>
+		<result property="userPw" column="userPw"/>
+	</resultMap>
+	
+	
+	<select id="adminLogin"  parameterType="String"  resultMap="TadminResult">
+	    select * from t_admin where  userName=#{userName} and userPw=#{userPw}
+	</select>
+</mapper> 
+
+
+
