@@ -28,8 +28,9 @@ public class OrderService {
 	}
 
 	public void orderDel(String id){
-		orderDao.orderDel1(id);
 		orderDao.orderDel2(id);
+		orderDao.orderDel1(id);
+		
 	}
 	
 	public void orderAdd(Vector cart,Tuser user){
@@ -37,8 +38,23 @@ public class OrderService {
     	SimpleDateFormat df2 = new SimpleDateFormat("yyyyMMddHHmmss");
 		Double sum=0.0;
 		if(cart!=null){
-	         int nextorderID=orderDao.nextOrderID();
-	         
+			 for (int j = 0; j < cart.size(); j++) {
+				  TOrderItem item=(TOrderItem)cart.elementAt(j);
+		          sum=sum+item.goodnum*item.getGoodPrice();
+		         
+			  }
+			 int nextorderID=orderDao.nextOrderID();
+	         Torder order=new Torder();
+			  order.setOrderAddress(user.getAddress());
+			  order.setOrderbianhao(df2.format(new Date()));
+			  order.setOrderDate(df.format(new Date()));
+			  order.setOrderID(String.valueOf(nextorderID));
+			  order.setOrdermoney(String.valueOf(sum));
+			  order.setOrderStatus("待发货");
+			  order.setUserID(user.getUserID());
+			  order.setUserName(user.getUsername());
+			  orderDao.orderAdd(order);
+			  
 			 for (int i = 0; i < cart.size(); i++) {
 				  TOrderItem item=(TOrderItem)cart.elementAt(i);
 				  item.setOrderID(String.valueOf(nextorderID));
@@ -49,16 +65,7 @@ public class OrderService {
 		  		  map.put("goodID", item.getGoodID());
 		  		  orderDao.cunkunEdit(map);
 			  }
-			  Torder order=new Torder();
-			  order.setOrderAddress(user.getAddress());
-			  order.setOrderbianhao(df2.format(new Date()));
-			  order.setOrderDate(df.format(new Date()));
-			  order.setOrderID(String.valueOf(nextorderID));
-			  order.setOrdermoney(String.valueOf(sum));
-			  order.setOrderStatus("待发货");
-			  order.setUserID(user.getUserID());
-			  order.setUserName(user.getUsername());
-			  orderDao.orderAdd(order);
+			 
 		}
 		
 	}

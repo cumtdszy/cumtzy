@@ -2,31 +2,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page isELIgnored="false" %> 
-<%@ page import="com.shop.entity.Tadmin"%> 
-<%
-String path = request.getContextPath();
-Tadmin admin=null;
-if((Tadmin)request.getSession().getAttribute("admin")!=null){
-	admin=(Tadmin)request.getSession().getAttribute("admin");
-}
 
 
-
-	if(admin==null){
-		%>
 			<script type="text/javascript">
-				alert("请先登录");
-			window.location.href="<%=path%>/toadminlogin";
+			 <c:if test="${empty  sessionScope.admin}">
+			alert("请先登录");
+			window.parent.location.href="${pageContext.request.contextPath}/toadminlogin";
+			  </c:if>
 			</script>
-   <%
-		return;
-	 }
-%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=path%>">
+    <base href="${pageContext.request.contextPath}">
     
     <title>基于java web的B2C网站</title>
     
@@ -38,11 +26,11 @@ if((Tadmin)request.getSession().getAttribute("admin")!=null){
 	
   </head>
   <frameset rows="15%,*">
-  <frame src="<%=path%>/m1" name="f1top">
+  <frame src="${pageContext.request.contextPath}/m1" name="f1top">
   
   <frameset cols="15%,*">
-  <frame src="<%=path%>/m2" name="f1left">
-<frame src="<%=path%>/m3" name="f1main">
+  <frame src="${pageContext.request.contextPath}/m2" name="f1left">
+<frame src="${pageContext.request.contextPath}/m3" name="f1main">
   </frameset>
   </frameset>
   <body>

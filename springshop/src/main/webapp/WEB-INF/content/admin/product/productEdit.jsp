@@ -1,25 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<jsp:directive.page import="java.text.SimpleDateFormat"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page isELIgnored="false" %> 
-<%
-String path = request.getContextPath();
-request.setCharacterEncoding("utf-8");
-response.setCharacterEncoding("utf-8");
-
-String goodName=request.getParameter("goodName");
-String goodMiaoshu=request.getParameter("goodMiaoshu");//new String(req.getParameter("goodMiaoshu").getBytes("iso-8859-1"), "utf-8");
-String goodPic=request.getParameter("goodPic");
-String price=request.getParameter("price");
-String cunkun=request.getParameter("cunkun");
-String goodID=request.getParameter("goodID");
-String categoryID=request.getParameter("categoryID");
-
-
-
-
-%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -30,18 +12,18 @@ String categoryID=request.getParameter("categoryID");
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
 		<meta http-equiv="description" content="This is my page" />
         
-        <link rel="stylesheet" type="text/css" href="<%=path %>/css/base.css" />
-        <script type="text/javascript" src="<%=path %>/js/popup.js"></script>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css" />
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/popup.js"></script>
        
-        <script language="javascript" src="<%=path %>/js/jquery-1.3.2.min.js"></script>
-        <script language="javascript"  src="<%=path %>/js/jquery.showLoading.min.js"></script>
+        <script language="javascript" src="${pageContext.request.contextPath}/js/jquery-1.3.2.min.js"></script>
+        <script language="javascript"  src="${pageContext.request.contextPath}/js/jquery.showLoading.min.js"></script>
         <script language="javascript">
            
 		    
 		  function gE(x){ return document.getElementById(x);} 
            $(document).ready(function(){
                init1();
-               $("#categoryID").val('<%=categoryID%>');
+               $("#categoryID").val('${requestScope.categoryID}');
            }); 
         
            function init1(){
@@ -49,7 +31,7 @@ String categoryID=request.getParameter("categoryID");
   	        async :false,  
   	        cache:true,  
   	        type: 'POST',  
-  	        url: "<%=path%>/categoryJson",//请求的action路径  
+  	        url: "${pageContext.request.contextPath}/categoryJson",//请求的action路径  
   	        error: function () {//请求失败处理函数  
   	            alert('返回异常');  
   	            //jQuery('#registeruserDiv').hideLoading();	
@@ -71,7 +53,7 @@ String categoryID=request.getParameter("categoryID");
  		  function gE(x){ return document.getElementById(x);} 
  	      
  		  function loginOut(){
- 		      window.location.href="<%=path%>/userLogout";
+ 		      window.location.href="${pageContext.request.contextPath}/userLogout";
  						
  		  }
  	  
@@ -104,19 +86,19 @@ String categoryID=request.getParameter("categoryID");
         </script>
 	</head>
 
-	<body leftmargin="2" topmargin="9" background='<%=path %>/img/allbg.gif'>
-			<form action="<%=path %>/productEdit" name="formAdd" enctype="multipart/form-data" method="post"  onsubmit="return check()">
-			       <input type="hidden" id="goodID" name="goodID" value="<%=goodID%>"></input>
+	<body leftmargin="2" topmargin="9" background='${pageContext.request.contextPath}/img/allbg.gif'>
+			<form action="${pageContext.request.contextPath}/productEdit" name="formAdd" enctype="multipart/form-data" method="post"  onsubmit="return check()">
+			       <input type="hidden" id="goodID" name="goodID" value="${requestScope.goodID}"></input>
 				     <table width="98%" align="center" border="0" cellpadding="4" cellspacing="1" bgcolor="#CBD8AC" style="margin-bottom:8px">
 						<tr bgcolor="#EEF4EA">
-					        <td colspan="3" background="<%=path %>/img/wbg.gif" class='title'><span>商品修改</span></td>
+					        <td colspan="3" background="${pageContext.request.contextPath}/img/wbg.gif" class='title'><span>商品修改</span></td>
 					    </tr>
 						<tr align='center' bgcolor="#FFFFFF" height="22">
 						    <td width="25%" bgcolor="#FFFFFF" align="right">
 						         商品名称：
 						    </td>
 						    <td width="75%" bgcolor="#FFFFFF" align="left">
-						        <input type="text" id="goodName" name="goodName" size="20" value="<%=goodName%>"/>
+						        <input type="text" id="goodName" name="goodName" size="20" value="${requestScope.goodName}"/>
 						    </td>
 						</tr>
 						
@@ -126,7 +108,7 @@ String categoryID=request.getParameter("categoryID");
 						        商品简介：
 						    </td>
 						    <td width="75%" bgcolor="#FFFFFF" align="left">
-						          <input type="text" id="goodMiaoshu" name="goodMiaoshu" size="60" value="<%=goodMiaoshu%>"/>
+						          <input type="text" id="goodMiaoshu" name="goodMiaoshu" size="60" value="${requestScope.goodMiaoshu}"/>
 						    </td>
 						</tr>
 						
@@ -136,7 +118,7 @@ String categoryID=request.getParameter("categoryID");
 						        商品图片：
 						    </td>
 						    <td width="75%" bgcolor="#FFFFFF" align="left">
-						          <img src="<%=path%>/<%=goodPic%>" width="200px" height="200px"/>
+						          <img src="${pageContext.request.contextPath}/${requestScope.goodPic}" width="200px" height="200px"/>
 						    </td>
 						</tr>
 						
@@ -145,7 +127,7 @@ String categoryID=request.getParameter("categoryID");
 						       重新上传图片：
 						    </td>
 						    <td width="85%" bgcolor="#FFFFFF" align="left">
-						        <input type="file" name="yuanshiname" id="yuanshiname" size="30" value="<%=goodPic%>" readonly="readonly"/>
+						        <input type="file" name="yuanshiname" id="yuanshiname" size="30" value="${requestScope.goodPic}" readonly="readonly"/>
 						        <input type="hidden" name="filetype" id="filetype" ></input>
 						    </td>
 						</tr>
@@ -155,7 +137,7 @@ String categoryID=request.getParameter("categoryID");
 						         价格：
 						    </td>
 						    <td width="75%" bgcolor="#FFFFFF" align="left">
-						        <input type="text" id="price" name="price" value="<%=price%>" size="20" />
+						        <input type="text" id="price" name="price" value="${requestScope.price}" size="20" />
 						    </td>
 						</tr>
 				    
@@ -164,7 +146,7 @@ String categoryID=request.getParameter("categoryID");
 						         库存：
 						    </td>
 						    <td width="75%" bgcolor="#FFFFFF" align="left">
-						        <input type="text" id="cunkun" name="cunkun" value="<%=cunkun%>" size="20"/>
+						        <input type="text" id="cunkun" name="cunkun" value="${requestScope.cunkun}" size="20"/>
 						    </td>
 						</tr>
 						
@@ -180,14 +162,7 @@ String categoryID=request.getParameter("categoryID");
 						    </td>
 						</tr>
 						
-				       <tr align='center' bgcolor="#FFFFFF" height="22">
-						    <td width="25%" bgcolor="#FFFFFF" align="right">
-						         添加时间：
-						    </td>
-						    <td width="75%" bgcolor="#FFFFFF" align="left">
-						        <input name="createDate" type="text" id="createDate" value="<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date())%>"/>
-						    </td>
-						</tr>						
+				      			
 						<tr align='center' bgcolor="#FFFFFF" height="22">
 						    <td width="25%" bgcolor="#FFFFFF" align="right">
 						        &nbsp;

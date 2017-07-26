@@ -14,11 +14,11 @@ public class DB
 
 	private String user = "root";
 
-	private String password = "root";
+	private String password = "123456";
 
 	private String className = "com.mysql.jdbc.Driver";
 
-	private String url = "jdbc:mysql://localhost:3306/b2c?useUnicode=true&characterEncoding=utf8";
+	private String url = "jdbc:mysql://localhost:3306/dingdan?useUnicode=true&characterEncoding=utf8";
 	
 	public DB()
 	{

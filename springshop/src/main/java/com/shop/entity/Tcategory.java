@@ -1,5 +1,5 @@
 package com.shop.entity;
-
+//。
 public class Tcategory {
 	private String categoryID;
 	private String categoryName;

@@ -1,22 +1,16 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<jsp:directive.page import="java.text.SimpleDateFormat"/>
-<jsp:directive.page import="java.util.Date"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page isELIgnored="false" %> 
-<%@ page import="com.shop.entity.Tuser"%>
-<%
-String path = request.getContextPath();
 
-%>
 
 <!DOCTYPE HTML>
 <html>
 	<head>
 		<title>B2C水果销售网站</title>
-		<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-		<link href="css/theme.css" rel='stylesheet' type='text/css' />
+		<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+		<link href="${pageContext.request.contextPath}/css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<link href="${pageContext.request.contextPath}/css/theme.css" rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
 
@@ -25,7 +19,7 @@ String path = request.getContextPath();
        
        <script type="text/javascript">
           function loginOut(){
-						window.location.href="<%=path%>/userLogout";
+						window.location.href="${pageContext.request.contextPath}/userLogout";
 						
 					}
 		
@@ -34,16 +28,15 @@ String path = request.getContextPath();
 		<!----webfonts---->
 		
 		<!----//webfonts---->
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 		<!--  jquery plguin -->
 	<!--start slider -->
-	    <link rel="stylesheet" href="css/fwslider.css" media="all">
-	    <link rel="stylesheet" href="css/index.css" media="all">
-		<script src="js/jquery-ui.min.js"></script>
-		<script src="js/css3-mediaqueries.js"></script>
-		<script src="js/fwslider.js"></script>
+	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fwslider.css" media="all">
+		<script src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/css3-mediaqueries.js"></script>
+		<script src="${pageContext.request.contextPath}/js/fwslider.js"></script>
 	<!--end slider -->
 	</head>
 	<body>
@@ -52,7 +45,7 @@ String path = request.getContextPath();
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4">
-						<div class="logo"><a href="<%=path%>/page/index.jsp"></a></div>
+						<div class="logo"><a href="${pageContext.request.contextPath}/index"></a></div>
 					</div>
 					<div class="col-md-8">					
 	 					<nav class="navbar navbar-default" role="navigation">
@@ -69,22 +62,22 @@ String path = request.getContextPath();
 						    <!-- Collect the nav links, forms, and other content for toggling -->
 						    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						      <ul class="nav navbar-nav">
-						      	 <li> <a href="<%=path%>/index">首页</a></li>
-						        <li><a href="<%=path %>/categoryAll">产品分类</a></li>
+						      	 <li> <a href="${pageContext.request.contextPath}/index">首页</a></li>
+						        <li><a href="${pageContext.request.contextPath}/categoryAll">产品分类</a></li>
 						       
 						        <c:if test="${empty  sessionScope.user}">
-						           <li><a href="<%=path%>/login">登陆</a></li>
-						        <li><a href="<%=path%>/register">注册</a></li>
+						           <li><a href="${pageContext.request.contextPath}/login">登陆</a></li>
+						        <li><a href="${pageContext.request.contextPath}/register">注册</a></li>
 						         </c:if>
 						         
 						         <c:if test="${not empty  sessionScope.user}">
 						      
-						          <li><a href="<%=path%>/orderAll.action">我的订单</a></li>
+						          <li><a href="${pageContext.request.contextPath}/orderAll.action">我的订单</a></li>
 						            
 						         </c:if>
 						         
                                 
-                                  <li><a href="<%=path%>/toadminlogin">后台管理</a></li>
+                                  <li><a href="${pageContext.request.contextPath}/toadminlogin">后台管理</a></li>
                         
 						      </ul>							      					    					      
 						    </div><!-- /.navbar-collapse -->
@@ -92,7 +85,7 @@ String path = request.getContextPath();
 						</nav>
 						<div class="right">
 							<ul class="list-unstyled">
-								<form class="navbar-form pull-right" role="search" action="<%=path%>/productAll" method="post">
+								<form class="navbar-form pull-right" role="search" action="${pageContext.request.contextPath}/productAll" method="post">
 			                       <div class="form-group">
 			                          <input type="text" class="form-control" value="葡萄" name="productName" >
 			                        </div>
@@ -116,7 +109,7 @@ String path = request.getContextPath();
 		    <div id="fwslider">
 		        <div class="slider_container">
 		            <div class="slide"> 
-		                    <img src="<%=path%>/images/img.jpg" alt=""/>
+		                    <img src="${pageContext.request.contextPath}/images/img.jpg" alt=""/>
 		                <div class="slide_content">
 		                    <div class="slide_content_wrap">
 		                         <p class="description">欢迎您来到</p>
@@ -128,7 +121,7 @@ String path = request.getContextPath();
 		                </div>
 		            </div>		        
 		            <div class="slide">
-		                <img src="<%=path%>/images/img.jpg" alt=""/>
+		                <img src="${pageContext.request.contextPath}/images/img.jpg" alt=""/>
 		                <div class="slide_content">
 		                     <div class="slide_content_wrap">		                   
 		                         <p class="description">欢迎您来到 </p>
@@ -167,15 +160,15 @@ String path = request.getContextPath();
 		 	</div>	
 		 </div>	
 		 <div class="copy-right text-center">
-			<p> <%
-        String onLineCount = String.valueOf(application.getAttribute("counts"));
-			if(onLineCount!=null&&!onLineCount.equalsIgnoreCase("")&&!onLineCount.equalsIgnoreCase("null")){
-				   out.write("当前在线人数：" + onLineCount);
-			   }else{
-				   out.write("当前在线人数：0"); 
-			   }
-		        
-    %>
+			<p>
+			
+			<c:if test="${empty applicationScope.counts}">
+			      当前在线用户为:0
+			</c:if>
+			
+			<c:if test="${not empty applicationScope.counts}">
+			     当前在线用户为:${applicationScope.counts}
+			</c:if>
     </p>	
 		</div>
 	</div>

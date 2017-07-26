@@ -2,9 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page isELIgnored="false" %> 
-<%
-String path = request.getContextPath();
-%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,20 +12,20 @@ String path = request.getContextPath();
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
 		<meta http-equiv="description" content="This is my page" />
 
-		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css" />
 		
         <script language="javascript">
            function adminDel(userId)
            {
                if(confirm('您确定删除吗？'))
                {
-                   window.location.href="<%=path %>/orderDel?id="+orderID;
+                   window.location.href="${pageContext.request.contextPath}/orderDel?id="+orderID;
                }
            }
            
            function adminAdd()
            {
-                 var url="<%=path %>/admin/category/categoryAdd.jsp";
+                 var url="${pageContext.request.contextPath}/admin/category/categoryAdd.jsp";
                  //var n="";
                  //var w="480px";
                  //var h="500px";
@@ -39,10 +36,10 @@ String path = request.getContextPath();
        </script>
 	</head>
 
-	<body leftmargin="2" topmargin="2" background='<%=path %>/img/allbg.gif'>
+	<body leftmargin="2" topmargin="2" background='${pageContext.request.contextPath}/img/allbg.gif'>
 			<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D1DDAA" align="center" style="margin-top:8px">
 				<tr bgcolor="#E7E7E7">
-					<td height="14" colspan="7" background="<%=path %>/img/tbg.gif">&nbsp;所有订单&nbsp;</td>
+					<td height="14" colspan="7" background="${pageContext.request.contextPath}/img/tbg.gif">&nbsp;所有订单&nbsp;</td>
 				</tr>
 				<tr align="center" bgcolor="#FAFAF1" height="22">
 					<td>消费者</td>
@@ -78,7 +75,7 @@ String path = request.getContextPath();
 					</td>
 					<td bgcolor="#FFFFFF" align="center">
 						     
-						 <a href="<%=path%>/orderDel?id=${order.orderID}">删掉订单</a>     	     
+						 <a href="${pageContext.request.contextPath}/orderDel?id=${order.orderID}">删掉订单</a>     	     
 					</td>
 				</tr>
 				</c:forEach>

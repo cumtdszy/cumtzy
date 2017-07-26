@@ -10,7 +10,6 @@ public class MySessionListener implements HttpSessionListener,HttpSessionAttribu
 	
     private long counts=0L;  
   
-   
     public void sessionCreated(HttpSessionEvent event) {  
         // TODO Auto-generated method stub  
         System.out.println("counts is----"+counts);
@@ -29,6 +28,7 @@ public class MySessionListener implements HttpSessionListener,HttpSessionAttribu
     
     public void attributeAdded(HttpSessionBindingEvent sbe) {  
     	this.counts=this.counts+1L;  
+    	  System.out.println("5555555");  
         //保存在application作用域  
     	sbe.getSession().getServletContext().setAttribute("counts", counts);  
     }  
@@ -37,6 +37,7 @@ public class MySessionListener implements HttpSessionListener,HttpSessionAttribu
     public void attributeRemoved(HttpSessionBindingEvent arg0) {  
           
     	this.counts=this.counts-1L;  
+    	  System.out.println("66666");  
     	arg0.getSession().getServletContext().setAttribute("counts", counts);  
     }  
   

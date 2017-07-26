@@ -50,8 +50,8 @@ public class OrderController {
 			@RequestParam(value = "flag", required = false) String flag,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {	
-		Tuser user=(Tuser)request.getSession().getAttribute("user");
-		List<Torder> orderList=orderService.orderAll(user.getUserID());
+		Tuser user=(Tuser)request.getSession().getAttribute("user");//存放信息，通过session获取user
+		List<Torder> orderList=orderService.orderAll(user.getUserID());//从service层获取表
 	
 		ModelAndView mav = new ModelAndView();
 		request.setAttribute("orderList",orderList);
@@ -115,7 +115,10 @@ public class OrderController {
 			HttpSession session) {	
 		ModelAndView mv = new ModelAndView();
 		if(request.getSession().getAttribute("user")!=null){
-			int goodID = Integer.parseInt(request.getParameter("goodID"));
+			int goodID = Integer.parseInt(request.getParameter("goodID"));//定义一个int类型变量，=：赋值操作，Interger：int的包装类，也就是整数
+					//.parseInt(arg):将参数arg转换成int（整数）
+					//request:是jsp内置对象，即客户端发来的请求对象
+					//.getParameter("time"):获得客户端发来的请求参数即获得名（name）为times的请求值
 			int goodPrice = Integer.parseInt(request.getParameter("goodPrice"));
 			int goodnum = Integer.parseInt(request.getParameter("goodnum"));
 			String goodName = request.getParameter("goodName");
@@ -126,11 +129,11 @@ public class OrderController {
 			orderitem.setGoodnum(goodnum);
 			orderitem.setGoodPrice(goodPrice);
 			Vector cart = (Vector) request.getSession().getAttribute("cart");
-			if (cart == null) {
+			if (cart == null) {//如果是第一次就创建购物车
 				cart = new Vector();
 			}
 
-			else {
+			else {//如果有该物品就
 				for (int i = 0; i < cart.size(); i++) {
 					TOrderItem form = (TOrderItem) cart.elementAt(i);
 					if (form.goodID == orderitem.goodID) {
@@ -141,9 +144,9 @@ public class OrderController {
 					}
 				}
 			}
-			if (flag)
+			if (flag)////如果是新商品就加入购物车中
 				cart.add(orderitem);
-			request.getSession().setAttribute("cart", cart);
+			request.getSession().setAttribute("cart", cart);//存放信息
 			
 			mv.setViewName("cart");
 		}

@@ -44,16 +44,19 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<!-- 添加对springmvc的支持 -->
 	<servlet>
 		<servlet-name>springMVC</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class><!--servlet对应的java类  -->
+		<!--servlet的参数信息  -->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:spring-mvc.xml</param-value>
 		</init-param>
+		<!--在Web应用启动时立即加载 servlet-->
 		<load-on-startup>1</load-on-startup>
 		<async-supported>true</async-supported>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springMVC</servlet-name>
+		<!--监听当前域的所有请求-->
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	

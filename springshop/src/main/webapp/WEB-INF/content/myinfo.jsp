@@ -1,36 +1,22 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<jsp:directive.page import="java.text.SimpleDateFormat"/>
-<jsp:directive.page import="java.util.Date"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page isELIgnored="false" %> 
-<%@ page import="com.shop.entity.Tuser"%>
-<%
-String path = request.getContextPath();
-Tuser user=null;
-if((Tuser)request.getSession().getAttribute("user")!=null){
-	user=(Tuser)request.getSession().getAttribute("user");
-}
 
-
-
-	if(user==null){
-		%>
 			<script type="text/javascript">
-				alert("请先登录");
-			window.location.href="<%=path%>/page/login.jsp";
+			    <c:if test="${empty  sessionScope.user}">
+			   alert("请先登录");
+			    window.location.href="${pageContext.request.contextPath}/page/login.jsp";
+			    </c:if>
 			</script>
-   <%
-		return;
-	 }
-%>
+ 
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>在线购物网站系统</title>
-		<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-		<link href="css/theme.css" rel='stylesheet' type='text/css' />
+		<title>B2C水果销售网站</title>
+		<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+		<link href="${pageContext.request.contextPath}/css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<link href="${pageContext.request.contextPath}/css/theme.css" rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		
@@ -41,15 +27,15 @@ if((Tuser)request.getSession().getAttribute("user")!=null){
 		<!----webfonts---->
 		
 		<!----//webfonts---->
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 		
 		 <script type="text/javascript">
 		  function gE(x){ return document.getElementById(x);} 
 	      
 		  function loginOut(){
-		      window.location.href="<%=path%>/userLogout";
+		      window.location.href="${pageContext.request.contextPath}/userLogout";
 						
 		  }
 	  
@@ -106,7 +92,7 @@ if((Tuser)request.getSession().getAttribute("user")!=null){
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4">
-						<div class="logo"><a href="<%=path%>/page/index.jsp"></div>
+						<div class="logo"><a href="${pageContext.request.contextPath}/index"></div>
 					</div>
 					<div class="col-md-8">					
 	 					<nav class="navbar navbar-default" role="navigation">
@@ -123,14 +109,17 @@ if((Tuser)request.getSession().getAttribute("user")!=null){
 						    <!-- Collect the nav links, forms, and other content for toggling -->
 						    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						      <ul class="nav navbar-nav">
-						      	 	 <c:if test="${empty  sessionScope.user}">
-						           <li><a href="<%=path%>/login">登陆</a></li>
-						        <li><a href="<%=path%>/register">注册</a></li>
+						     	 <li> <a href="${pageContext.request.contextPath}/index">首页</a></li>
+						        <li><a href="${pageContext.request.contextPath}/categoryAll">产品分类</a></li>
+						       
+						        <c:if test="${ empty  sessionScope.user}">
+						           <li><a href="${pageContext.request.contextPath}/login">登陆</a></li>
+						        <li><a href="${pageContext.request.contextPath}/register">注册</a></li>
 						         </c:if>
 						         
 						         <c:if test="${not empty  sessionScope.user}">
 						      
-						          <li><a href="<%=path%>/orderAll.action">我的订单</a></li>
+						          <li><a href="${pageContext.request.contextPath}/orderAll.action">我的订单</a></li>
 						            
 						         </c:if>
 						      </ul>							      					    					      
@@ -140,14 +129,14 @@ if((Tuser)request.getSession().getAttribute("user")!=null){
 						<div class="right">
 							<ul class="list-unstyled">
 									
-									<li><a href="<%=path%>/about">关于我们</a></li>		
+									<li><a href="${pageContext.request.contextPath}/about">关于我们</a></li>		
 								  <c:if test="${not empty  sessionScope.user}">
 					               <li>
 					                                  ${sessionScope.user.username}<a href="javascript:void(0)" onclick="loginOut()">[退出]</a> &nbsp;
 					             </li>
 					             
 					              <li>
-					              个人信息<a href="<%=path%>/myinfo">修改</a>
+					              个人信息<a href="${pageContext.request.contextPath}/myinfo">修改</a>
 					              </li>
 					           </c:if>												
 							</ul>							
@@ -166,9 +155,9 @@ if((Tuser)request.getSession().getAttribute("user")!=null){
 			 		<h2>个人信息修改页面</h2>
 			 	</div>	
 		 	</div>
-       	       <form class="form-horizontal" role="form"  action="<%=path %>/usermod" method="post"  onsubmit="return check()">
+       	       <form class="form-horizontal" role="form"  action="${pageContext.request.contextPath}/usermod" method="post"  onsubmit="return check()">
        	     	 <div class="form-group">
-				    <input type="hidden" id="id" name="id" value="<%=user.getUserID()%>">
+				    <input type="hidden" id="id" name="id" value="${sessionScope.user.userID}">
 				    
 				    <label for="inputmane3" class="col-sm-2 control-label">用户名</label>
 				    <div class="col-sm-10">
@@ -178,35 +167,35 @@ if((Tuser)request.getSession().getAttribute("user")!=null){
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">密码</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="loginpw" name="loginpw" value="<%=user.getLoginpw()%>" >
+				      <input type="text" class="form-control" id="loginpw" name="loginpw" value=" ${sessionScope.user.loginpw}" >
 				    </div>
 				  </div>
 				  
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">确认密码</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="confirpw" name="confirpw" value="<%=user.getLoginpw()%>">
+				      <input type="text" class="form-control" id="confirpw" name="confirpw" value=" ${sessionScope.user.loginpw}">
 				    </div>
 				  </div>
 				  
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">地址</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="address" name="address" value="<%=user.getAddress()%>" >
+				      <input type="text" class="form-control" id="address" name="address" value=" ${sessionScope.user.address}" >
 				    </div>
 				  </div>
 				  
 				    <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">电话</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="phone" name="phone" value="<%=user.getPhone() %>" >
+				      <input type="text" class="form-control" id="phone" name="phone" value=" ${sessionScope.user.phone}" >
 				    </div>
 				  </div>
 				  
 				  <div class="form-group">
 				    <label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="email" name="email" value="<%=user.getEmail()%>" >
+				      <input type="text" class="form-control" id="email" name="email" value=" ${sessionScope.user.email}" >
 				    </div>
 				  </div>
 				  
@@ -225,16 +214,15 @@ if((Tuser)request.getSession().getAttribute("user")!=null){
 		 	
 		 </div>	
 		 <div class="copy-right text-center">
-			<p> <%
-        
-			String onLineCount = String.valueOf(application.getAttribute("counts"));
-				    		if(onLineCount!=null&&!onLineCount.equalsIgnoreCase("")&&!onLineCount.equalsIgnoreCase("null")){
-				    			   out.write("当前在线人数：" + onLineCount);
-				    		   }else{
-				    			   out.write("当前在线人数：0"); 
-				    		   }
-				    	        
-    %></p>	
+			<p> 
+				<c:if test="${empty applicationScope.counts}">
+			      当前在线用户为:0
+			</c:if>
+			
+			<c:if test="${not empty applicationScope.counts}">
+			     当前在线用户为:${applicationScope.counts}
+			</c:if>
+			</p>	
 		</div>
 	</div>
 </div>

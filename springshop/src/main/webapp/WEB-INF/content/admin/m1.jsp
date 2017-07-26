@@ -1,13 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
+
     
     <title>My JSP 'm1.jsp' starting page</title>
     
@@ -23,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	function logout(){
 		if(confirm('您确定要退出系统吗？')){
-			window.parent.location.href='<%=path%>/toadminlogin';
+			window.parent.location.href='${pageContext.request.contextPath}/toadminlogin';
 		}
 		window.location.reload();
 	}

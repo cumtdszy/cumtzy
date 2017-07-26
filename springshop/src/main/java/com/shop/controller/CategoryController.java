@@ -24,17 +24,22 @@ import com.shop.util.JsonUtil;
 public class CategoryController {
 	@Resource
 	private CategoryService categoryService;
-	
 	@RequestMapping("/categoryMana")
 	public ModelAndView categoryMana(
 			@RequestParam(value = "id", required = false) String id,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) throws IOException {	
+		
+		
 		List<Tcategory> categoryList=categoryService.categoryMana();
+		
 		ModelAndView mav = new ModelAndView();
+	
 		request.setAttribute("categoryList",categoryList);
+		
 		mav.setViewName("admin/category/categoryMana");
 		mav.addObject("categoryList", categoryList);
+		
 		return mav;
 	}
 	
@@ -93,20 +98,21 @@ public class CategoryController {
 			HttpSession session) throws Exception {	
 		response.setContentType("text/plain"); 
 		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");//设置了编码方式
 		List<Tcategory> categoryList=categoryService.categoryMana();
-		response.getWriter().println(JsonUtil.list2json(categoryList));	
-	}
+		response.getWriter().println(JsonUtil.list2json(categoryList));//将list型的东东转换成为JSON形式的数据response是相应用户请求的对象，
+		//而request是用户请求对象（如一个http请求）
+	}//将对象result序列化成JSON形式字符串写入到客户端页面
 	
 	
 	@RequestMapping("/categoryTree")
 	public void categoryTree(
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) throws Exception {	
-		response.setContentType("text/plain"); 
+		response.setContentType("text/plain");//文本 
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		StringBuilder json = new StringBuilder("");
+		StringBuilder json = new StringBuilder("");//StringBuilder是一个类，可以用来处理字符串
 		json.append("[");
 		
 		List<Tcategory> categoryList=categoryService.categoryMana();
@@ -125,7 +131,7 @@ public class CategoryController {
 		}
 		json.append("]");
 		
-		response.getWriter().println(json.toString().replace("},]", "}]"));	
+		response.getWriter().println(json.toString().replace("},]", "}]"));	//将对象转换成json写出到客户端
 	}
 	
 	

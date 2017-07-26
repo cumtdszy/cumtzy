@@ -2,9 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page isELIgnored="false" %> 
-<%
-String path = request.getContextPath();
-%>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,27 +13,27 @@ String path = request.getContextPath();
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
 		<meta http-equiv="description" content="This is my page" />
 
-		<link rel="stylesheet" type="text/css" href="css/base.css" />
-			<script language="JavaScript" src="js/public.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css" />
+			<script language="JavaScript" src="${pageContext.request.contextPath}/js/public.js" type="text/javascript"></script>
         <script language="javascript">
            function adminDel(userId)
            {
                if(confirm('您确定删除吗？'))
                {
-                   window.location.href="<%=path %>/productDel?goodID="+userId;
+                   window.location.href="${pageContext.request.contextPath}/productDel?goodID="+userId;
                }
            }
            
            function adminAdd()
            {
-                 var url="<%=path %>/toproductadd";
+                 var url="${pageContext.request.contextPath}/toproductadd";
 				 window.location.href=url;
            }
            
            function over(picPath)
 	       {
 			 
-        	  if (picPath=="")  picPath="<%=path %>/images/album_no_pic.gif";
+        	  if (picPath=="")  picPath="${pageContext.request.contextPath}/images/album_no_pic.gif";
 			  x = event.clientX;
 			  y = event.clientY;      
 			  document.all.tip.style.display = "block";
@@ -51,10 +49,10 @@ String path = request.getContextPath();
        </script>
 	</head>
 
-	<body leftmargin="2" topmargin="2" background='<%=path %>/img/allbg.gif'>
+	<body leftmargin="2" topmargin="2" background='${pageContext.request.contextPath}/img/allbg.gif'>
 			<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D1DDAA" align="center" style="margin-top:8px">
 				<tr bgcolor="#E7E7E7">
-					<td height="14" colspan="8" background="<%=path %>/img/tbg.gif">&nbsp;所有产品&nbsp;</td>
+					<td height="14" colspan="8" background="${pageContext.request.contextPath}/img/tbg.gif">&nbsp;所有产品&nbsp;</td>
 				</tr>
 				<tr align="center" bgcolor="#FAFAF1" height="22">
 					<td width="10%">商品ID</td>
@@ -78,7 +76,7 @@ String path = request.getContextPath();
 							${product.goodMiaoshu}
 					</td>
 					<td bgcolor="#FFFFFF" align="center">
-						<img src="<%=path%>${product.goodPic}" with="60px" height="60px"/>
+						<img src="${pageContext.request.contextPath}${product.goodPic}" with="60px" height="60px"/>
 					</td>
 					<td bgcolor="#FFFFFF" align="center">
 							${product.catergoryName}
@@ -90,7 +88,7 @@ String path = request.getContextPath();
 						 	${product.cunkun}  
 					</td>
 					<td bgcolor="#FFFFFF" align="center">
-						    <form action="<%=path %>/toproductEdit" method="post">
+						    <form action="${pageContext.request.contextPath}/toproductEdit" method="post">
 						     <input type="hidden" name="goodID" value="${product.goodID}"/>
 						    <input type="hidden" name="goodName" value="${product.goodName}"/>
 						    

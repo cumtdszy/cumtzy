@@ -7,11 +7,11 @@ import com.shop.dao.AdminDao;
 import com.shop.entity.Tadmin;
 
 
-@Service("adminService")
+@Service("adminService")//注解
 public class AdminService {
 
 	@Resource
-	private AdminDao adminlDao;
+	private AdminDao adminlDao;////是自动注入一个id=adminlDao的bean
 	
 
 	public Tadmin adminLogin(Tadmin admin){

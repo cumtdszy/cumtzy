@@ -12,7 +12,7 @@ public class Tfavoriate {
 	}
 	public String userID;
 	public String userName;
-	public String url;
+	public String url;//统一资源定位符
 	public String getId() {
 		return id;
 	}

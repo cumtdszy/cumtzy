@@ -59,8 +59,8 @@ public class ProductController {
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) throws IOException {	
 		
-		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("productName", productName);
+		Map<String,Object> map=new HashMap<String,Object>();//新建一个HashMap
+		map.put("productName", productName);//存放
 		map.put("categoryID", categoryID);
 		List<Tproduct> productList=productService.productAll(map);
 		ModelAndView mav = new ModelAndView();
@@ -97,14 +97,14 @@ public class ProductController {
 			@RequestParam(value = "yuanshiname", required = false) MultipartFile yuanshiname,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) throws IOException {	
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-		String fileName=df.format(new Date());
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
+		String fileName=df.format(new Date());//new Date()为获取当前系统时间	
 		String realPath=request.getRealPath("/upload");
 		System.out.println("file.getOriginalFilename() is:"+yuanshiname.getOriginalFilename());
 		//String fileName = yuanshiname.getOriginalFilename();  
-		 File targetFile = new File(realPath, fileName+"."+filetype);  
+		 File targetFile = new File(realPath, fileName+"."+filetype); //创建文件流，可以过去文件属性，或者对文件进行操作 
 	     if(!targetFile.exists()){  
-	         targetFile.mkdirs();  
+	         targetFile.mkdirs();  //当targetFile为文件时，targetFile.mkdirs();语句会把形如**.txt文件也建立成文件夹形式
 	     }  
 	  
 	     //保存  

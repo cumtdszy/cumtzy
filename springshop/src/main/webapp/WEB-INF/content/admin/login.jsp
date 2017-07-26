@@ -1,7 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -13,7 +11,7 @@ String path = request.getContextPath();
 			margin-bottom: 0px;
 			background-color: #1D3647;
 		}
-		.login_top_bg {background-image: url(<%=path %>/img/login-top-bg.gif);background-repeat: repeat-x;}
+		.login_top_bg {background-image: url(${pageContext.request.contextPath}/img/login-top-bg.gif);background-repeat: repeat-x;}
 		.body {
 			background-color: #EEF2FB;
 			left: 0px;
@@ -23,7 +21,7 @@ String path = request.getContextPath();
 		}
 		
 		.login-buttom-bg {
-			background-image: url(<%=path %>/img/login-buttom-bg.gif);
+			background-image: url(${pageContext.request.contextPath}/img/login-buttom-bg.gif);
 			background-repeat: repeat-x;
 		}
 		.login-buttom-txt {
@@ -44,15 +42,15 @@ String path = request.getContextPath();
 			font-size: 12px;
 			color: #629DAE;
 			text-decoration: none;
-			background-image: url(<%=path %>/img/Submit_bg.gif);
+			background-image: url(${pageContext.request.contextPath}/img/Submit_bg.gif);
 			background-repeat: repeat-x;
 		}
 		.login_bg {
-			background-image: url(<%=path %>/img/login_bg.jpg);
+			background-image: url(${pageContext.request.contextPath}/img/login_bg.jpg);
 			background-repeat: repeat-x;
 		}
 		.login_bg2 {
-			background-image: url(<%=path %>/img/login-content-bg.gif);
+			background-image: url(${pageContext.request.contextPath}/img/login-content-bg.gif);
 			background-repeat: no-repeat;
 			background-position: right;
 		}
@@ -75,7 +73,7 @@ String path = request.getContextPath();
 			font-weight: bold;
 		}
 		.admin_topbg {
-			background-image: url(<%=path %>/img/top-right.gif);
+			background-image: url(${pageContext.request.contextPath}/img/top-right.gif);
 			background-repeat: repeat-x;
 		}
 		.txt_bt {
@@ -87,7 +85,7 @@ String path = request.getContextPath();
 			text-decoration: none;
 		}
 		.left_topbg {
-			background-image: url(<%=path %>/img/content-bg.gif);
+			background-image: url(${pageContext.request.contextPath}/img/content-bg.gif);
 			background-repeat: repeat-x;
 		}
 		.admin_toptxt {
@@ -118,7 +116,7 @@ String path = request.getContextPath();
 			line-height: 26px;
 			font-weight: bold;
 			color: #000000;
-			background-image: url(<%=path %>/img/top_bt.jpg);
+			background-image: url(${pageContext.request.contextPath}/img/top_bt.jpg);
 			background-repeat: no-repeat;
 			display: block;
 			text-indent: 15px;
@@ -176,7 +174,7 @@ String path = request.getContextPath();
 			font-size: 12px;
 			line-height: 25px;
 			border: 1px solid #B5D0D9;
-			background-image: url(<%=path %>/img/right_smbg.jpg);
+			background-image: url(${pageContext.request.contextPath}/img/right_smbg.jpg);
 			background-repeat: repeat-x;
 		}
 		.sec2 {
@@ -199,7 +197,7 @@ String path = request.getContextPath();
 			font-size: 12px;
 			line-height: 26px;
 			color: #666666;
-			background-image: url(<%=path %>/img/menu_bg.gif);
+			background-image: url(${pageContext.request.contextPath}/img/menu_bg.gif);
 			background-repeat: no-repeat;
 			list-style-type: none;
 			list-style-image: none;
@@ -229,7 +227,7 @@ String path = request.getContextPath();
 			font-size: 12px;
 			line-height: 26px;
 			color: #666666;
-			background-image: url(<%=path %>/img/menu_bg.gif);
+			background-image: url(${pageContext.request.contextPath}/img/menu_bg.gif);
 			background-repeat: no-repeat;
 			list-style-type: none;
 			list-style-image: none;
@@ -302,7 +300,7 @@ String path = request.getContextPath();
               <td height="21"><table cellSpacing="0" cellPadding="0" width="100%" border="0" id="table211" height="328">
                   <tr>
                     <td height="164" colspan="2" align="middle">
-                        <FORM name="ThisForm" action="<%=path %>/adminlogin" method=post onSubmit="return check()">
+                        <FORM name="ThisForm" action="${pageContext.request.contextPath}/adminlogin" method=post onSubmit="return check()">
                         <table cellSpacing="0" cellPadding="0" width="100%" border="0" height="143" id="table212">
                           <tr>
                             <td width="13%" height="38" class="top_hui_text"><span class="login_txt">用户名：&nbsp;&nbsp; </span></td>
@@ -311,7 +309,7 @@ String path = request.getContextPath();
                           <tr>
                             <td width="13%" height="35" class="top_hui_text"><span class="login_txt"> 密 码： &nbsp;&nbsp; </span></td>
                             <td height="35" colspan="2" class="top_hui_text"><input class="editbox4" type="password" size="20" name="userPw">
-                              <img src="<%=path %>/img/luck.gif" width="19" height="18"> </td>
+                              <img src="${pageContext.request.contextPath}/img/luck.gif" width="19" height="18"> </td>
                           </tr>
                           
                           <tr >
@@ -328,11 +326,11 @@ String path = request.getContextPath();
                             <td height="35" >&nbsp;</td>
                             <td width="20%" height="35" >
                                 <input name="button" type="submit" class="button" id="Submit" value="登 陆"> 
-                                <img id="indicator" src="<%=path %>/img/loading.gif" style="display:none"/>
+                                <img id="indicator" src="${pageContext.request.contextPath}/img/loading.gif" style="display:none"/>
                             </td>
                             <td width="67%" class="top_hui_text">
                             <input name="cs" type="reset" class="button" id="cs" value="重 置">
-                            <!--  <a href="<%=path%>/admin/register.jsp">注册</a>-->
+                            <!--  <a href="${pageContext.request.contextPath}/admin/register.jsp">注册</a>-->
                             </td>
                           </tr>
                         </table>
@@ -340,7 +338,7 @@ String path = request.getContextPath();
                     </form></td>
                   </tr>
                   <tr>
-                    <td width="433" height="164" align="right" valign="bottom"><img src="<%=path %>/img/login-wel.gif" width="242" height="138"></td>
+                    <td width="433" height="164" align="right" valign="bottom"><img src="${pageContext.request.contextPath}/img/login-wel.gif" width="242" height="138"></td>
                     <td width="57" align="right" valign="bottom">&nbsp;</td>
                   </tr>
               </table></td>

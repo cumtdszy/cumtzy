@@ -1,11 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<jsp:directive.page import="java.text.SimpleDateFormat"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page isELIgnored="false" %> 
-<%
-String path = request.getContextPath();
-%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -16,11 +12,11 @@ String path = request.getContextPath();
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
 		<meta http-equiv="description" content="This is my page" />
         
-        <link rel="stylesheet" type="text/css" href="<%=path %>/css/base.css" />
-        <script type="text/javascript" src="<%=path %>/js/popup.js"></script>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/base.css" />
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/popup.js"></script>
        
-        <script language="javascript" src="<%=path %>/js/jquery-1.3.2.min.js"></script>
-        <script language="javascript"  src="<%=path %>/js/jquery.showLoading.min.js"></script>
+        <script language="javascript" src="${pageContext.request.contextPath}/js/jquery-1.3.2.min.js"></script>
+        <script language="javascript"  src="${pageContext.request.contextPath}/js/jquery.showLoading.min.js"></script>
         <script language="javascript">
            
 		    
@@ -34,7 +30,7 @@ String path = request.getContextPath();
   	        async :false,  
   	        cache:true,  
   	        type: 'POST',  
-  	        url: "<%=path%>/categoryJson",//请求的action路径  
+  	        url: "${pageContext.request.contextPath}/categoryJson",//请求的action路径  
   	        error: function () {//请求失败处理函数  
   	            alert('返回异常');  
   	            //jQuery('#registeruserDiv').hideLoading();	
@@ -56,7 +52,7 @@ String path = request.getContextPath();
  		  function gE(x){ return document.getElementById(x);} 
  	      
  		  function loginOut(){
- 		      window.location.href="<%=path%>/userLogout";
+ 		      window.location.href="${pageContext.request.contextPath}/userLogout";
  						
  		  }
  	  
@@ -95,11 +91,11 @@ String path = request.getContextPath();
         </script>
 	</head>
 
-	<body leftmargin="2" topmargin="9" background='<%=path %>/img/allbg.gif'>
-			<form action="<%=path %>/productAdd" name="formAdd" enctype="multipart/form-data" method="post"  onsubmit="return check()">
+	<body leftmargin="2" topmargin="9" background='${pageContext.request.contextPath}/img/allbg.gif'>
+			<form action="${pageContext.request.contextPath}/productAdd" name="formAdd" enctype="multipart/form-data" method="post"  onsubmit="return check()">
 				     <table width="98%" align="center" border="0" cellpadding="4" cellspacing="1" bgcolor="#CBD8AC" style="margin-bottom:8px">
 						<tr bgcolor="#EEF4EA">
-					        <td colspan="3" background="<%=path %>/img/wbg.gif" class='title'><span>商品添加</span></td>
+					        <td colspan="3" background="${pageContext.request.contextPath}/img/wbg.gif" class='title'><span>商品添加</span></td>
 					    </tr>
 						<tr align='center' bgcolor="#FFFFFF" height="22">
 						    <td width="25%" bgcolor="#FFFFFF" align="right">
@@ -166,7 +162,7 @@ String path = request.getContextPath();
 						         添加时间：
 						    </td>
 						    <td width="75%" bgcolor="#FFFFFF" align="left">
-						        <input name="createDate" type="text" id="createDate" value="<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date())%>"/>
+						        <input name="createDate" type="text" id="createDate" value=""/>
 						    </td>
 						</tr>						
 						<tr align='center' bgcolor="#FFFFFF" height="22">

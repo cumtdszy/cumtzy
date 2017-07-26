@@ -1,21 +1,17 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<jsp:directive.page import="java.text.SimpleDateFormat"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false" %> 
 
-<%
-String path = request.getContextPath();
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="pragma" content="no-cache" />
 		<meta http-equiv="cache-control" content="no-cache" />
 		<meta http-equiv="expires" content="0" />
-		<link rel="stylesheet" href="css/style2.css" type="text/css">
-        <script src="amcharts/amcharts.js" type="text/javascript"></script>    
-        <script language="javascript" src="js/jquery-1.3.2.min.js"></script>
-        <script language="javascript"  src="js/jquery.showLoading.min.js"></script>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style2.css" type="text/css">
+        <script src="${pageContext.request.contextPath}/amcharts/amcharts.js" type="text/javascript"></script>    
+        <script language="javascript" src="${pageContext.request.contextPath}/js/jquery-1.3.2.min.js"></script>
+        <script language="javascript"  src="${pageContext.request.contextPath}/js/jquery.showLoading.min.js"></script>
         <script type="text/javascript">
         var obj1;
         var chart;
@@ -33,7 +29,7 @@ String path = request.getContextPath();
 	        async :false,  
 	        cache:true,  
 	        type: 'POST',  
-	        url: "<%=path%>/fenxi",//请求的action路径  
+	        url: "${pageContext.request.contextPath}/fenxi",//请求的action路径  
 	        error: function () {//请求失败处理函数  
 	            alert('返回异常');  
 	            //jQuery('#registeruserDiv').hideLoading();	

@@ -1,36 +1,23 @@
 package com.shop.test;
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
-
-
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.shop.entity.Tproduct;
-
 import com.shop.service.impl.ProductService;
-
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:/applicationContext.xml" })
 public class ProductTest {
 	
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	
-	public void setUp() throws Exception {
-	}
-
-	
-	public void tearDown() throws Exception {
-	}
-
-	
+	@Autowired
+	private ProductService productService;
+	@Test
 	public void test() {
-		ApplicationContext aCtx = new FileSystemXmlApplicationContext("classpath:applicationContext.xml");	
-		ProductService productService = (ProductService) aCtx.getBean("productService");
+	
+		
 		List productList=productService.productMana();
 	
 		for (int i=0;i<productList.size();i++){

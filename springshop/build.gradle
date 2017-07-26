@@ -38,7 +38,9 @@ dependencies {
     compile 'commons-io:commons-io:2.5'
     compile 'commons-fileupload:commons-fileupload:1.2.2'
     compile 'org.apache.commons:commons-email:1.4'
-    testCompile 'junit:junit:4.12'
+    compile 'junit:junit:4.12'
+    compile 'org.springframework:spring-test:2.5'
+    compile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1' 
 }
 gretty {  
     port = 9090  

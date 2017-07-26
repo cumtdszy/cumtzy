@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.shop.dao.CategoryDao;
 import com.shop.entity.Tcategory;
-@Service("categoryService")
+@Service("categoryService")//@Service 这样, 是把这个类实例化为id=categoryService(默认bean名, 具体啥忘了反正不是userService)的bean
 public class CategoryService {
 
 	@Resource

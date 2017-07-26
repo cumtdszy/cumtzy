@@ -1,9 +1,11 @@
 package com.shop.entity;
-
+//。
 public class Tadmin {
+	//私有字段
   private String userId;
   private String userName;
   private String userPw;
+  //set/get方法
   public String getUserId() {
 	return userId;
 }

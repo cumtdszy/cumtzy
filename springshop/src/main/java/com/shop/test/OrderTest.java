@@ -1,44 +1,20 @@
 package com.shop.test;
-
-
-
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
-
-import com.shop.util.DB;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.shop.entity.Torder;
-import com.shop.service.impl.CategoryService;
 import com.shop.service.impl.OrderService;
-
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:/applicationContext.xml" })
 public class OrderTest {
 
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	
-	public void setUp() throws Exception {
-	}
-
-	
-	public void tearDown() throws Exception {
-	}
-
-
+	@Autowired
+	private OrderService orderService;
+	@Test
 	public void test() {
-		System.out.println("order test begin");
-		ApplicationContext aCtx = new FileSystemXmlApplicationContext("classpath:applicationContext.xml");	
-		OrderService orderService = (OrderService) aCtx.getBean("orderService");
-		
-		
 		List orderList=orderService.orderMana();
 		
 		for (int i=0;i<orderList.size();i++){
